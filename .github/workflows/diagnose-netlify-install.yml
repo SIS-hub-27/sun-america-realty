@@ -1,0 +1,50 @@
+name: Diagnose Netlify install
+
+on:
+  push:
+    branches:
+      - diagnose-netlify-install
+    paths:
+      - ".github/workflows/diagnose-netlify-install.yml"
+      - "package.json"
+      - "vite.config.ts"
+      - "netlify.toml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Show tool versions
+        run: |
+          node --version
+          npm --version
+          npm config get registry
+
+      - name: Generate lockfile
+        run: npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+
+      - name: Upload lockfile
+        uses: actions/upload-artifact@v4
+        with:
+          name: package-lock
+          path: package-lock.json
+
+      - name: Install dependencies from lockfile
+        run: npm ci --no-audit --no-fund
+
+      - name: Build
+        run: npm run build
