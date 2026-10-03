@@ -17,7 +17,7 @@ permissions:
 jobs:
   diagnose:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -34,17 +34,14 @@ jobs:
           npm --version
           npm config get registry
 
-      - name: Generate lockfile
-        run: npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
 
-      - name: Upload lockfile
+      - name: Upload generated lockfile
         uses: actions/upload-artifact@v4
         with:
-          name: package-lock
+          name: package-lock-full-install
           path: package-lock.json
-
-      - name: Install dependencies from lockfile
-        run: npm ci --no-audit --no-fund
 
       - name: Build
         run: npm run build
