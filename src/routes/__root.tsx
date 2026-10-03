@@ -14,7 +14,7 @@ import { Footer } from "@/components/Footer";
 import { Toaster } from "@/components/ui/sonner";
 import ogImage from "@/assets/og-default.jpg";
 
-const SITE_URL = "https://sunamerica.lovable.app";
+const SITE_URL = "https://sunamericarealty.com";
 
 const ORG_JSONLD = {
   "@context": "https://schema.org",
