@@ -11,9 +11,9 @@ export const Route = createFileRoute("/market")({
       { name: "description", content: "Tampa Bay commercial real estate intelligence — Hillsborough, Pinellas, Pasco, Hernando, and Polk counties. I-275, I-75, I-4 corridor trends and acquisition windows." },
       { property: "og:title", content: "Greater Tampa Bay Market | Sun America Realty, LLC" },
       { property: "og:description", content: "Five counties. Three interstates. One market in motion." },
-      { property: "og:url", content: "https://sunamerica.lovable.app/market" },
+      { property: "og:url", content: "https://sunamericarealty.com/market" },
     ],
-    links: [{ rel: "canonical", href: "https://sunamerica.lovable.app/market" }],
+    links: [{ rel: "canonical", href: "https://sunamericarealty.com/market" }],
   }),
 });
 

@@ -3,7 +3,7 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { CTAButton } from "@/components/CTAButton";
 import marketImg from "@/assets/market-interchange.jpg";
 
-const SITE_URL = "https://sunamerica.lovable.app";
+const SITE_URL = "https://sunamericarealty.com";
 
 export const Route = createFileRoute("/markets/polk")({
   component: PolkPage,

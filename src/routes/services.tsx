@@ -10,9 +10,9 @@ export const Route = createFileRoute("/services")({
       { name: "description", content: "Brokerage, land acquisition, entitlements, deal structuring, disposition, and investment services for commercial real estate across Greater Tampa Bay." },
       { property: "og:title", content: "Services | Sun America Realty, LLC" },
       { property: "og:description", content: "Land. Entitlements. Deal structure. If that's your world, you're in the right place." },
-      { property: "og:url", content: "https://sunamerica.lovable.app/services" },
+      { property: "og:url", content: "https://sunamericarealty.com/services" },
     ],
-    links: [{ rel: "canonical", href: "https://sunamerica.lovable.app/services" }],
+    links: [{ rel: "canonical", href: "https://sunamericarealty.com/services" }],
   }),
 });
 
