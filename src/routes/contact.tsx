@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { submitLead } from "@/lib/leads.functions";
 import { SectionHeading } from "@/components/SectionHeading";
 import { CTAButton } from "@/components/CTAButton";
 import { toast } from "sonner";
@@ -9,24 +8,24 @@ export const Route = createFileRoute("/contact")({
   component: ContactPage,
   head: () => ({
     meta: [
-      { title: "Contact — Larry Guilford & Brian Orr | Sun America Realty, LLC" },
-      { name: "description", content: "Contact Sun America Realty for Greater Tampa Bay commercial real estate. Larry Guilford, Broker of Record, and Brian Orr, Sales Associate. (352) 437-3059." },
+      { title: "Contact — Larry Guilford | Sun America Realty, LLC" },
+      { name: "description", content: "Contact Sun America Realty for Greater Tampa Bay commercial real estate. Larry Guilford, Broker of Record. (352) 437-3059." },
       { property: "og:title", content: "Contact | Sun America Realty, LLC" },
       { property: "og:description", content: "Buying, selling, or investing in commercial real estate — let us know how we can help." },
-      { property: "og:url", content: "https://sunamerica.lovable.app/contact" },
+      { property: "og:url", content: "https://sunamericarealty.com/contact" },
     ],
-    links: [{ rel: "canonical", href: "https://sunamerica.lovable.app/contact" }],
+    links: [{ rel: "canonical", href: "https://sunamericarealty.com/contact" }],
     scripts: [
       {
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Person",
-          name: "Brian Orr",
-          jobTitle: "Sales Associate",
-          telephone: "+1-347-219-8825",
-          email: "brian@sunamericarealty.com",
-          worksFor: { "@type": "RealEstateAgent", name: "SUN AMERICA REALTY, LLC", url: "https://sunamerica.lovable.app" },
+          name: "Larry Guilford",
+          jobTitle: "Broker of Record",
+          telephone: "+1-352-437-3059",
+          email: "larry@sunamericarealty.com",
+          worksFor: { "@type": "RealEstateAgent", name: "SUN AMERICA REALTY, LLC", url: "https://sunamericarealty.com" },
         }),
       },
     ],
@@ -44,22 +43,26 @@ function ContactPage() {
     e.preventDefault();
     setSubmitting(true);
     try {
-      const answers = `Name: ${name} | Phone: ${phone || "(not provided)"} | Message: ${message}`;
-      await submitLead({
-        data: {
-          source: "contact-form",
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          "form-name": "contact",
+          name,
           email,
-          answers,
+          phone,
+          message,
           page_source: "/contact",
-        },
+        }).toString(),
       });
+      if (!response.ok) throw new Error("Form submission failed");
       toast.success("Message received. We'll be in touch shortly.");
       setName("");
       setEmail("");
       setPhone("");
       setMessage("");
     } catch {
-      toast.error("Something went wrong. Email brian@sunamericarealty.com directly.");
+      toast.error("Something went wrong. Email info@sunamericarealty.com directly.");
     } finally {
       setSubmitting(false);
     }
@@ -89,13 +92,6 @@ function ContactPage() {
                 phoneHref: "+13524373059",
                 email: "larry@sunamericarealty.com",
               },
-              {
-                name: "Brian Orr",
-                detail: "Sales Associate. Real estate and business investor turned commercial broker. Background in wealth management, multi-asset investing, and business-development advisory. Brings an operator's underwriting discipline and a capital-markets lens to every transaction.",
-                phone: "(347) 219-8825",
-                phoneHref: "+13472198825",
-                email: "brian@sunamericarealty.com",
-              },
             ].map((p) => (
               <div key={p.name} className="border-t-2 border-[var(--brand-red)] pt-6 flex flex-col">
                 <h2 className="font-display text-3xl md:text-4xl font-extrabold uppercase text-[var(--brand-navy)]">{p.name}</h2>
@@ -120,7 +116,8 @@ function ContactPage() {
       <section className="bg-[var(--brand-light-gray)]">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-20 md:py-24">
           <SectionHeading>Tell us what you're working on.</SectionHeading>
-          <form onSubmit={onSubmit} className="mt-10 grid gap-6">
+          <form name="contact" data-netlify="true" onSubmit={onSubmit} className="mt-10 grid gap-6">
+            <input type="hidden" name="form-name" value="contact" />
             <div>
               <label htmlFor="name" className="block font-data text-xs font-semibold uppercase tracking-[0.2em] text-[var(--brand-navy)] mb-2">Name</label>
               <input id="name" name="name" required value={name} onChange={(e) => setName(e.target.value)} className="w-full border-2 border-[oklch(0.85_0_0)] bg-white px-4 py-3 font-body text-base text-[var(--brand-dark-gray)] focus:border-[var(--brand-navy)] focus:outline-none" />

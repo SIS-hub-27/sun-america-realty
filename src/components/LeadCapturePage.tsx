@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { CTAButton } from "@/components/CTAButton";
-import { submitLead } from "@/lib/leads.functions";
 
 export type Question = {
   prompt: string;
@@ -67,19 +66,24 @@ export function LeadCapturePage({
       const answersText = questions
         .map((q, i) => `${q.prompt} — ${answers[i]}`)
         .join(" | ");
-      await submitLead({
-        data: {
+      const pageSource =
+        typeof window !== "undefined" ? window.location.pathname : `/${slug}`;
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          "form-name": "lead-capture",
           source: slug,
           email,
           answers: answersText,
-          page_source:
-            typeof window !== "undefined" ? window.location.pathname : `/${slug}`,
-        },
+          page_source: pageSource,
+        }).toString(),
       });
+      if (!response.ok) throw new Error("Form submission failed");
       setUnlocked(true);
     } catch {
       setError(
-        "Something went wrong. Email us directly at brian@sunamericarealty.com",
+        "Something went wrong. Email us directly at info@sunamericarealty.com",
       );
     } finally {
       setSubmitting(false);
