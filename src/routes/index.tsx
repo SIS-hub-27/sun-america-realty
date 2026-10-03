@@ -13,9 +13,9 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Commercial real estate brokerage and investment across Greater Tampa Bay — Hillsborough, Pinellas, Pasco, Hernando, and Polk counties. Land, development, and income-producing properties." },
       { property: "og:title", content: "Sun America Realty, LLC | Your Next Deal Starts Here" },
       { property: "og:description", content: "Commercial real estate brokerage and investment across Greater Tampa Bay." },
-      { property: "og:url", content: "https://sunamerica.lovable.app/" },
+      { property: "og:url", content: "https://sunamericarealty.com/" },
     ],
-    links: [{ rel: "canonical", href: "https://sunamerica.lovable.app/" }],
+    links: [{ rel: "canonical", href: "https://sunamericarealty.com/" }],
   }),
 });
 

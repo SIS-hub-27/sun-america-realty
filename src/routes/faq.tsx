@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SectionHeading } from "@/components/SectionHeading";
 import { CTAButton } from "@/components/CTAButton";
 
-const SITE_URL = "https://sunamerica.lovable.app";
+const SITE_URL = "https://sunamericarealty.com";
 
 const FAQS: { q: string; a: string }[] = [
   {

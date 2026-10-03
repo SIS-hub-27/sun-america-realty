@@ -16,9 +16,9 @@ export const Route = createFileRoute("/listings")({
       { name: "description", content: "Current commercial land listings along the I-75 corridor in Pasco County, Florida. Industrial, commercial, and infill development sites." },
       { property: "og:title", content: "Current Listings | Sun America Realty, LLC" },
       { property: "og:description", content: "Active and under-contract commercial land along the I-75 corridor." },
-      { property: "og:url", content: "https://sunamerica.lovable.app/listings" },
+      { property: "og:url", content: "https://sunamericarealty.com/listings" },
     ],
-    links: [{ rel: "canonical", href: "https://sunamerica.lovable.app/listings" }],
+    links: [{ rel: "canonical", href: "https://sunamericarealty.com/listings" }],
     scripts: [
       {
         type: "application/ld+json",

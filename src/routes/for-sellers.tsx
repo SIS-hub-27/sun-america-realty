@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LeadCapturePage } from "@/components/LeadCapturePage";
 
-const SITE_URL = "https://sunamerica.lovable.app";
+const SITE_URL = "https://sunamericarealty.com";
 
 export const Route = createFileRoute("/for-sellers")({
   component: ForSellersPage,
